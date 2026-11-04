@@ -1,0 +1,46 @@
+{
+  "status": "passed",
+  "mode": "hosted",
+  "provenance": "already-managed",
+  "new_launch": false,
+  "expected": {
+    "image": "docker.io/kaw393939/is373_ci_cd@sha256:aec414c990a5de6ed74c9e8dcb105b78f6358c03a8cea70a9d40dcda51c3a8fa",
+    "commit": "4600202bad42da0c5ffb11d83ce8364671293d3d"
+  },
+  "actual": {
+    "image_id": "sha256:aec414c990a5de6ed74c9e8dcb105b78f6358c03a8cea70a9d40dcda51c3a8fa",
+    "repo_digests": [
+      "kaw393939/is373_ci_cd@sha256:aec414c990a5de6ed74c9e8dcb105b78f6358c03a8cea70a9d40dcda51c3a8fa"
+    ],
+    "commit": "4600202bad42da0c5ffb11d83ce8364671293d3d",
+    "environment": "production",
+    "container_id": "c16070e36f4ad85b15aae2dfac03bade40cbf30e91fdcfe3765af35cfa6b00bf",
+    "architecture": "amd64",
+    "os": "linux"
+  },
+  "checks": {
+    "health_identity": "passed",
+    "positive_multiply": {
+      "status": 200,
+      "result": 42
+    },
+    "negative_division_by_zero": {
+      "status": 400
+    },
+    "negative_numeric_string": {
+      "status": 422
+    },
+    "trusted_public_https": true
+  },
+  "preservation": {
+    "checked_count": 3,
+    "unchanged": true,
+    "scope": "container identity, state and published ports"
+  },
+  "limitations": [
+    "This is a supplied image, not the learner's build or CI/CD pipeline.",
+    "API checks do not prove a human review or whole-server security."
+  ],
+  "observed_at": "2026-11-04T17:10:49.476125+00:00",
+  "url": "https://calc.mohammedhammoudeh.duckdns.org"
+}
