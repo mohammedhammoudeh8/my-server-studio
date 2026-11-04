@@ -2,51 +2,38 @@
 
 ## STUDIO-001 · Launch a tested calculator on an existing server
 
-**Status:** Pending learner scope agreement and actual evidence.
-**Next step:** Confirm your clone with the coach, then follow [Lesson 01](studio/lesson-01.md).
-**Instructor implementation:** [issue #9](https://github.com/kaw393939/373_hosting/issues/9).
-Create your own issue from the [lesson template](.github/ISSUE_TEMPLATE/studio-calculator.md).
+**Status:** Launched and verified; PR and CI linked below.
+**Own issue:** [#1](https://github.com/mohammedhammoudeh8/my-server-studio/issues/1) · **Branch:** `studio-001`
 
 ## Agreed result
 
-Launch the supplied published calculator image through your existing Traefik
-network and a nonconflicting HTTPS hostname. Preserve unrelated services and
-host access. Do not add another proxy/updater or build a substitute image.
-The [release selection](studio/calculator-release.json) supplies the expected
-commit and multi-platform digest independently of the running website.
-An explicitly agreed adoption of a matching existing deployment is recorded
-as adoption, not a fresh launch. This bounded lesson does not certify the whole
-server baseline or a vulnerability-free image.
+Launch the supplied published calculator image through my existing Traefik
+network on a new HTTPS hostname, preserving my existing services (Traefik plus
+my Gridiron prod and QA sites). No new proxy, updater or substitute image.
 
-- **Public hostname:** Pending.
-- **New launch or adopted deployment, and reason:** Pending.
-- **Own issue / feature branch:** Pending.
-- **Agreed scope or actual access/configuration gap:** Pending.
+- **Public hostname:** https://calc.mohammedhammoudeh.duckdns.org
+- **New launch or adopted deployment, and reason:** New launch. `doctor` reported `launch-new`: no existing route used this hostname.
+- **Server / network / image:** my DigitalOcean droplet as non-root user `mohamad` (Docker group, no sudo) · network `hosting_default` · pinned image from [calculator-release.json](studio/calculator-release.json)
+- **Gap found and fixed before launch:** my Traefik HTTPS entrypoint had no default certificate resolver (each site set `certresolver=le` itself), so the studio route would not have received a trusted certificate. Added `--entrypoints.websecure.http.tls.certresolver=le` through my Gridiron repo's qa pipeline (commit 71cb5dd). Existing routes were unaffected.
+- **Known access gap:** NJIT Wi-Fi resets HTTPS connections to the droplet during the TLS handshake, even by IP. The site loads over cellular and passed the server-side HTTPS check.
 
-Private SSH targets and configuration stay in ignored local state. Share only
-reviewed, selected evidence; never commit credentials or raw server output.
-
-## Evidence to keep
+## Evidence
 
 | Evidence | Actual result / link |
 |---|---|
-| Prepared Black/Pylint/pytest and real-image browser checks | Not run; full local E2E needs local Docker or actual CI evidence |
-| Hosted image/commit, trusted HTTPS, valid and rejected API cases | Not verified; export selected evidence with `report` |
-| Preservation of unrelated services | Not verified |
-| Own prediction, check interpretation, browser observation and keep/revise reason | [LEARNING.md](LEARNING.md), Pending; disclose assistance |
-| Accuracy review before publishing learner excerpts | Pending |
-| Actual PR, latest CI, merge and issue closure | Pending |
+| Hosted image/commit, trusted HTTPS, valid and rejected API cases | `verify` passed: health/identity passed, 6 x 7 returned 200 with 42, division by zero 400, numeric string 422, trusted_public_https true. [studio/evidence.json](studio/evidence.json) |
+| Preservation of unrelated services | 3 existing containers checked, unchanged (identity, state, published ports) |
+| Local prepared checks | `check --fast` on Windows **failed**: pytest could not collect `tests/test_restrict_dashboard.py` because `signal.SIGHUP` does not exist on Windows, and Pylint reported a failure that was not investigated locally. Full local E2E not run (no local Docker). |
+| Full Black/Pylint/pytest/E2E | GitHub CI on the PR (Linux): see PR below |
+| My prediction, check interpretation, browser observation, keep decision | [LEARNING.md](LEARNING.md), my own words, revised after coach feedback where noted |
+| PR, CI, merge, issue closure | Pending |
 
-Link the exported `studio/evidence.json`, actual CI and issue/PR when available.
-CI does not deploy this server. A fixture, green check, timestamp, closed issue
-or AI assertion alone does not establish the full result. `status` reports
-recorded evidence and readiness for instructor review; it does not grade,
-certify authorship or establish understanding.
+CI does not deploy this server. A green check, closed issue or AI assertion alone
+does not establish the full result.
 
 ## Optional instructor history
 
-The records below are background, not steps to repeat. Their original anchors
-remain here so earlier links continue to work.
+The records below are background, not steps to repeat.
 
 ## HOST-001 · Keep the Traefik dashboard private
 
