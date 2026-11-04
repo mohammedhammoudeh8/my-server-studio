@@ -24,9 +24,9 @@ my Gridiron prod and QA sites). No new proxy, updater or substitute image.
 | Hosted image/commit, trusted HTTPS, valid and rejected API cases | `verify` passed: health/identity passed, 6 x 7 returned 200 with 42, division by zero 400, numeric string 422, trusted_public_https true. [studio/evidence.json](studio/evidence.json) |
 | Preservation of unrelated services | 3 existing containers checked, unchanged (identity, state, published ports) |
 | Local prepared checks | `check --fast` on Windows **failed**: pytest could not collect `tests/test_restrict_dashboard.py` because `signal.SIGHUP` does not exist on Windows, and Pylint reported a failure that was not investigated locally. Full local E2E not run (no local Docker). |
-| Full Black/Pylint/pytest/E2E | GitHub CI on the PR (Linux): see PR below |
+| Full Black/Pylint/pytest/E2E | Passed in GitHub CI on Linux: [PR #2 checks](https://github.com/mohammedhammoudeh8/my-server-studio/pull/2/checks) (integration-contract, studio incl. Chromium E2E, validate) |
 | My prediction, check interpretation, browser observation, keep decision | [LEARNING.md](LEARNING.md), my own words, revised after coach feedback where noted |
-| PR, CI, merge, issue closure | Pending |
+| PR, CI, merge, issue closure | [PR #2](https://github.com/mohammedhammoudeh8/my-server-studio/pull/2): 3/3 checks passed; merged to main, closes [#1](https://github.com/mohammedhammoudeh8/my-server-studio/issues/1) |
 
 CI does not deploy this server. A green check, closed issue or AI assertion alone
 does not establish the full result.
